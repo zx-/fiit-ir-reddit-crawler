@@ -1,6 +1,6 @@
 (ns fiit-ir-reddit-crawler.parser.subreddit
   (:require [net.cgrand.enlive-html :as html]
-            [fiit-ir-reddit-crawler.parser.common :refer :all]))
+            [fiit-ir-reddit-crawler.parser.common :as c]))
 
 
 (defn get-sub-count
@@ -14,10 +14,7 @@
 
 (defn get-name
   [resource]
-  (-> (html/select resource [:.redditname :> :a])
-      first
-      :content
-      first))
+  (c/get-content resource [:.redditname :> :a]))
 
 (defn get-link
   [resource]
@@ -29,7 +26,7 @@
 (defn parse-subreddit
   "returns hash of info from subreddit"
   [html-string]
-  (let [res (string->resource html-string)]
+  (let [res (c/string->resource html-string)]
     (-> {}
         (assoc :sub-count (get-sub-count res))
         (assoc :name (get-name res))

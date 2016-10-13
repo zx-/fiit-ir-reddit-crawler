@@ -9,3 +9,19 @@
                           .getBytes
                           java.io.ByteArrayInputStream.
                           io/input-stream )))
+
+(defn get-content
+  "Returns content"
+  [resource selector]
+  (-> (html/select resource selector)
+      first
+      :content
+      first))
+
+(defn normalize-text
+  "replaces \n with space and then merges spaces"
+  [string]
+  (-> string
+      clojure.string/trim
+      (clojure.string/replace #"\n" " ")
+      (clojure.string/replace #"\s+" " ")))
