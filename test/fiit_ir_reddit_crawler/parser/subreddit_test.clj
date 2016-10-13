@@ -3,7 +3,7 @@
             [fiit-ir-reddit-crawler.parser.subreddit :refer :all]
             [fiit-ir-reddit-crawler.parser.common :refer :all]))
 
-(deftest parse-subreddt-test)
+
 (def test-subreddit (slurp "dev-resources/test-subreddit.html"))
 
 (deftest get-sub-count-test
