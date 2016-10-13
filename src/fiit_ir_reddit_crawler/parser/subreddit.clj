@@ -1,14 +1,7 @@
 (ns fiit-ir-reddit-crawler.parser.subreddit
   (:require [net.cgrand.enlive-html :as html]
-            [clojure.java.io :as io]))
+            [fiit-ir-reddit-crawler.parser.common :refer :all]))
 
-(defn string->resource
-  [string]
-  "Creates html resource from given string"
-  (html/html-resource (-> string
-                          .getBytes
-                          java.io.ByteArrayInputStream.
-                          io/input-stream )))
 
 (defn get-sub-count
   [resource]
