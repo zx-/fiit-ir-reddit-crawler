@@ -38,11 +38,10 @@
 ;}
 
 (defn get-unvisited-links
-  [n]
+  [n start]
   (-> (esd/search connection "links" "link"
-                  :query {:term {"visited"  false}}
                                      :sort [{ :timestamp {:order :desc}}]
-                                     :from 0
+                                     :from start
                                      :size n)
       :hits
       :hits))

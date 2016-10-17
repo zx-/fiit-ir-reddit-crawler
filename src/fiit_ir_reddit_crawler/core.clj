@@ -1,7 +1,7 @@
 (ns fiit-ir-reddit-crawler.core
   (:require [clj-http.client :as client]
-            [fiit-ir-reddit-crawler.secret :as secret]
-            [clojure.data.json :as json]))
+            [fiit-ir-reddit-crawler.secret :as secret])
+  (:gen-class))
 
 (def ^:dynamic oauth-token nil)
 (def ^:dynamic rate-used 0)
@@ -14,11 +14,15 @@
 (def reddit "http://www.reddit.com")
 (def oauth-url "https://oauth.reddit.com")
 
+(defn print-info
+  []
+  (println "rate-used " rate-used)
+  (println "rate-remaining " rate-remaining)
+  (println "rate-reset" rate-reset))
 
 (defn parse-token-response
   [resp-json]
-  (let [r (json/read-str resp-json)
-        token (get r "access_token")]
+  (let [token (:access_token resp-json)]
     (alter-var-root #'oauth-token (fn [old new] new) token)))
 
 (defn refresh-token!
@@ -28,7 +32,8 @@
                         {:basic-auth secret/login-string
                          :throw-entire-message? true
                          :debug false
-                         :headers {"User-Agent" agent-name}}))))
+                         :headers {"User-Agent" agent-name}
+                         :as :json}))))
 
 (defn set-rates!
   "Set limits and rates and returns response"
