@@ -5,4 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [clj-http "3.3.0"]                         ;; client
-                 [enlive "1.1.6"]])                         ;; html parser
+                 [enlive "1.1.6"]                           ;; html parser
+                 [org.clojure/data.json "0.2.6"]
+                 [clojurewerkz/elastisch "2.2.2"]])          ;; parse json

@@ -10,3 +10,4 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
+/src/fiit_ir_reddit_crawler/secret.clj
