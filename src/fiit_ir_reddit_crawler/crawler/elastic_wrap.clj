@@ -27,3 +27,32 @@
                   :query (q/term :visited false))
       :hits
       :hits))
+
+
+;GET /links/_search
+;{
+; "from" : 0, "size" : 10,
+;"sort" : [{ "timestamp" : {"order" : "desc"}}],
+;"query": { "term" : {"visited" : false}}
+;}
+;}
+
+(defn get-unvisited-links
+  [n]
+  (-> (esd/search connection "links" "link"
+                  :query {:term {"visited"  false}}
+                                     :sort [{ :timestamp {:order :desc}}]
+                                     :from 0
+                                     :size n)
+      :hits
+      :hits))
+
+(defn set-visited
+  [link]
+  (esd/update-with-partial-doc connection "links" "link"
+                               (:_id link)
+                               {:visited true}))
+
+(defn index-post
+  [doc]
+  (esd/create connection "posts" "post" doc))
