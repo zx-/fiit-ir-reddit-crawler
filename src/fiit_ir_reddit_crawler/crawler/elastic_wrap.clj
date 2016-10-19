@@ -5,7 +5,7 @@
             [clojurewerkz.elastisch.rest.index :as esi]
             [clojurewerkz.elastisch.rest.document :as esd]))
 
-(def server "http://192.168.99.100:9200")
+(def server "http://192.168.3.3:9200")
 
 (def ^:dynamic connection (esr/connect server))
 
