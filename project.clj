@@ -7,4 +7,5 @@
                  [clj-http "3.3.0"]
                  [enlive "1.1.6"]
                  [slingshot "0.12.2"]
+                 [org.clojure/data.json "0.2.6"]
                  [clojurewerkz/elastisch "2.2.2"]])
